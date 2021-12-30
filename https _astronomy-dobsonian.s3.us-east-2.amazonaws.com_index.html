@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css">
+<head>
+<style> 
+a { 
+  color: red;
+}
+input { 
+  color: black;
+  background-color:red;
+}
+button { 
+  color: black;
+  background-color:red;
+}
+</style>
+</head>
+
+   <script>   
+   
+       var ropelength
+       var refazimuth
+       var refropepoint
+       
+       function done_setup(){
+       
+       var section1=document.getElementById("1")
+       var section2=document.getElementById("2")
+       ropelength=parseFloat(document.getElementById("ropelength").value)
+       refazimuth=parseFloat(document.getElementById("refazimuth").value)
+       refropepoint=parseFloat(document.getElementById("refropepoint").value)
+
+       section1.style.display='none'
+       section2.style.display='inline' 
+       }
+       function calculate(){
+       Targetazimuth=parseFloat(document.getElementById("Targetazimuth").value)
+       var currentdeg=360*refropepoint/ropelength
+       var Delta_actual=Targetazimuth-refazimuth
+       var Finaldeg=currentdeg+Delta_actual
+       var Toropepoint=(Finaldeg/360.0)*ropelength
+       if (Toropepoint>ropelength){
+           Toropepoint-=ropelength}
+       if (Toropepoint<0){
+           Toropepoint+=ropelength
+        }
+        
+
+         Toropepoint=Math.round(Toropepoint * 10) / 10
+        document.getElementById("output").innerHTML=String(Toropepoint)
+          } 
+   
+   </script>
+
+
+<body style="background-color:black;">
+     <div id="1">
+    <a style=" font-size:30px;">DIY dopsonian Push-To setup</a> <br><br>
+
+    <a style=" font-size:20px;">Circumference of Dobsonian telescope base</a> <br>
+    <input type="text" id="ropelength"   pattern="^[0-9.]*$" style="width:100%;font-size:60px;padding:1px;"  ><br>
+    <a style=" font-size:20px;"><strong>Freshly</strong> updated azimuth of the reference star</a> <br>
+    <input type="text" id="refazimuth"   pattern="^[0-9.]*$" style="width:100%;font-size:60px;padding:1px;" ><br>
+    <a style=" font-size:20px;">Ruler position when pointing to the star</a> <br>
+    <input type="text" id="refropepoint"   pattern="^[0-9.]*$" style="width:100%;font-size:60px;padding:1px;" ><br><br>
+    <button onclick='done_setup()'style="width:100%;font-size:20px">Done setup</button> <br>
+
+    </div>
+    <div id="2" style="display:none">
+        <a style=" font-size:20px;" " ><strong>Freshly</strong> updated azimuth of the target </a> <br>
+    <input type="text" id="Targetazimuth" onclick="this.value=''"  pattern="^[0-9.]*$" style="width:100%;font-size:60px;padding:1px;" ><br><br>
+        <button onclick='calculate()'style="width:100%;font-size:50px">Calculate </button> <br>
+        <a style=" font-size:100px;" id="output"></a> <br><br> <a style=" font-size:30px;">Rotate your telescope to this rope point </a> 
+
+        
+    </div>
+
+</body>
+</html>
